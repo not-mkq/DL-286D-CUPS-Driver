@@ -5,6 +5,8 @@
 ## Overview
 This repository hosts a GPLv3 CUPS raster filter (`dl286d-raster`) and a minimal ppdc source (`dl286d.drv`) that were reverse-engineered from USB traces of the Deli DL-286D label printer. The filter ingests `application/vnd.cups-raster` data, applies scaling plus ordered dithering, and emits the ESC/POS sequence expected by the printer.
 
+> **Limitations**: Only the wired USB transport is supported today—Bluetooth mode is not implemented. Media handling is tuned for the stock 40 mm × 50 mm labels; other sizes may render incorrectly.
+
 ## Build & Install
 1. Build the raster filter and install it for cupsd:
    ```bash

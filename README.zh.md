@@ -5,6 +5,8 @@
 ## 概述
 本仓库提供在 USB 抓包基础上逆向得到的 GPLv3 CUPS 滤镜 `dl286d-raster` 与简洁的 ppdc 描述 `dl286d.drv`，用于让得力 DL-286D 标签机在 Linux 上正常工作。滤镜读取 `application/vnd.cups-raster` 数据，完成缩放与抖动后输出设备所需的 ESC/POS 数据流。
 
+> **限制**：目前仅支持有线 USB 连接，蓝牙模式尚未适配；标签尺寸也仅针对官方 40 mm × 50 mm 规格做过测试，其他尺寸可能出现偏移。
+
 ## 构建与安装
 1. 编译滤镜并安装到 cupsd：
    ```bash
