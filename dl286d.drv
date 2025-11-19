@@ -1,0 +1,23 @@
+// dl286d.drv - Minimal raster driver definition
+
+#include <font.defs>
+#include <media.defs>
+#media "Label" 50mm 40mm
+Font *
+
+Manufacturer "Deli"
+ModelName "Deli DL-286D"
+Version 1.0
+
+Filter application/vnd.cups-raster 100 dl286d-raster
+
+
+*Resolution k 8 0 0 0 203x203dpi
+
+*MediaSize "Label"
+
+HWMargins 0 0 0 0
+{
+	ModelName "Deli DL-286D"
+	PCFileName "dl286d.ppd"
+}

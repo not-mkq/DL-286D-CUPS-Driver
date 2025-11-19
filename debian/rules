@@ -1,0 +1,19 @@
+#!/usr/bin/make -f
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	gcc -O2 -std=c11 -Wall -Wextra $(shell cups-config --cflags --ldflags) \
+		dl286d-raster.c -o dl286d-raster $(shell cups-config --libs raster)
+	mkdir -p ppd
+	ppdc -d ppd dl286d.drv
+
+override_dh_auto_install:
+	dh_auto_install
+	install -Dm755 dl286d-raster debian/dl286d-cups-driver/usr/lib/cups/filter/dl286d-raster
+	install -Dm644 ppd/dl286d.ppd debian/dl286d-cups-driver/usr/share/cups/model/dl286d.ppd
+	install -Dm644 README.md debian/dl286d-cups-driver/usr/share/doc/dl286d-cups-driver/README.md
+	install -Dm644 LICENSE debian/dl286d-cups-driver/usr/share/doc/dl286d-cups-driver/copyright

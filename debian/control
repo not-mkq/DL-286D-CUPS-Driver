@@ -1,0 +1,16 @@
+Source: dl286d-cups-driver
+Section: utils
+Priority: optional
+Maintainer: Your Name <you@example.com>
+Build-Depends: debhelper-compat (= 13), cups, pkg-config
+Standards-Version: 4.6.2
+Homepage: https://github.com/example/dl286d-cups-driver
+Rules-Requires-Root: no
+
+Package: dl286d-cups-driver
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, cups
+Description: CUPS driver for the Deli DL-286D label printer
+ This package ships a raster filter and a ppdc-generated PPD produced via
+ USB reverse engineering so that the DL-286D label maker can print reliably
+ on Linux systems.

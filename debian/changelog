@@ -1,0 +1,5 @@
+dl286d-cups-driver (1.0.0-1) unstable; urgency=medium
+
+  * Initial Debian packaging of the CUPS raster filter and PPD.
+
+ -- Your Name <you@example.com>  Wed, 19 Nov 2025 17:16:00 +0800
