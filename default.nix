@@ -1,26 +1,24 @@
 { lib
 , stdenv
-, fetchFromGitHub
 , cups
+, src ? lib.cleanSource ./. 
 }:
 
 stdenv.mkDerivation rec {
   pname = "dl286d-cups-driver";
-  version = "1.0.0";
+  version = "1.0";
 
-  src = fetchFromGitHub {
-    owner = "example";
-    repo = "dl286d-cups-driver";
-    rev = "v${version}";
-    hash = lib.fakeSha256;
-  };
+  inherit src;
 
   nativeBuildInputs = [ cups.dev ];
   buildInputs = [ cups ];
 
   buildPhase = ''
-    gcc -O2 -std=c11 -Wall -Wextra $(cups-config --cflags --ldflags) \
-      dl286d-raster.c -o dl286d-raster $(cups-config --libs raster)
+    cups_cflags=$(cups-config --cflags)
+    cups_ldflags=$(cups-config --ldflags)
+    cups_libs=$(cups-config --image --libs)
+    gcc -O2 -std=c11 -Wall -Wextra $cups_cflags $cups_ldflags \
+      dl286d-raster.c -o dl286d-raster $cups_libs
     mkdir -p ppd
     ppdc -d ppd dl286d.drv
   '';
@@ -36,7 +34,7 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     description = "CUPS raster filter and PPD for the Deli DL-286D label printer";
-    homepage = "https://github.com/example/dl286d-cups-driver";
+    homepage = "https://github.com/not-mkq/DL-286D-CUPS-Driver";
     license = licenses.gpl3Plus;
     maintainers = [];
     platforms = platforms.linux;

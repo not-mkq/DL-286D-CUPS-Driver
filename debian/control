@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Your Name <you@example.com>
 Build-Depends: debhelper-compat (= 13), cups, pkg-config
 Standards-Version: 4.6.2
-Homepage: https://github.com/example/dl286d-cups-driver
+Homepage: https://github.com/not-mkq/DL-286D-CUPS-Driver
 Rules-Requires-Root: no
 
 Package: dl286d-cups-driver

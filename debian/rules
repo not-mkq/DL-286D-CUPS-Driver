@@ -3,11 +3,14 @@
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 
 %:
-	dh $@
+	dh $@ --without autoreconf
 
 override_dh_auto_build:
-	gcc -O2 -std=c11 -Wall -Wextra $(shell cups-config --cflags --ldflags) \
-		dl286d-raster.c -o dl286d-raster $(shell cups-config --libs raster)
+	CUPS_CFLAGS="$(shell cups-config --cflags)" ; \
+	CUPS_LDFLAGS="$(shell cups-config --ldflags)" ; \
+	CUPS_LIBS="$(shell cups-config --image --libs)" ; \
+	gcc -O2 -std=c11 -Wall -Wextra $$CUPS_CFLAGS $$CUPS_LDFLAGS \
+		dl286d-raster.c -o dl286d-raster $$CUPS_LIBS
 	mkdir -p ppd
 	ppdc -d ppd dl286d.drv
 
@@ -17,3 +20,9 @@ override_dh_auto_install:
 	install -Dm644 ppd/dl286d.ppd debian/dl286d-cups-driver/usr/share/cups/model/dl286d.ppd
 	install -Dm644 README.md debian/dl286d-cups-driver/usr/share/doc/dl286d-cups-driver/README.md
 	install -Dm644 LICENSE debian/dl286d-cups-driver/usr/share/doc/dl286d-cups-driver/copyright
+
+override_dh_shlibdeps:
+	dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info
+
+override_dh_builddeb:
+	dh_builddeb --destdir='$(CURDIR)/release'

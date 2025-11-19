@@ -1,20 +1,24 @@
 pkgname=dl286d-cups-driver
-pkgver=1.0.0
+pkgver=1.0
 pkgrel=1
 pkgdesc="CUPS raster filter and PPD for the Deli DL-286D label printer"
 arch=('x86_64' 'aarch64')
-url="https://github.com/example/dl286d-cups-driver"
+url="https://github.com/not-mkq/DL-286D-CUPS-Driver"
 license=('GPL3')
 depends=('cups')
 makedepends=('cups' 'gcc')
-source=("$pkgname-$pkgver.tar.gz::https://github.com/example/dl286d-cups-driver/archive/refs/tags/v$pkgver.tar.gz")
+source=("$pkgname-$pkgver.tar.gz::https://github.com/not-mkq/DL-286D-CUPS-Driver/archive/refs/tags/v$pkgver.tar.gz")
 sha256sums=('SKIP')
 
 build() {
   cd "$srcdir/${pkgname}-${pkgver}"
 
-  gcc -O2 -std=c11 -Wall -Wextra $(cups-config --cflags --ldflags) \
-    dl286d-raster.c -o dl286d-raster $(cups-config --libs raster)
+  local cups_cflags="$(cups-config --cflags)"
+  local cups_ldflags="$(cups-config --ldflags)"
+  local cups_libs="$(cups-config --image --libs)"
+
+  gcc -O2 -std=c11 -Wall -Wextra ${cups_cflags} ${cups_ldflags} \
+    dl286d-raster.c -o dl286d-raster ${cups_libs}
 
   mkdir -p ppd
   ppdc -d ppd dl286d.drv

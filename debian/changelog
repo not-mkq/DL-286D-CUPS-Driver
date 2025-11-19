@@ -1,4 +1,4 @@
-dl286d-cups-driver (1.0.0-1) unstable; urgency=medium
+dl286d-cups-driver (1.0-1) unstable; urgency=medium
 
   * Initial Debian packaging of the CUPS raster filter and PPD.
 
