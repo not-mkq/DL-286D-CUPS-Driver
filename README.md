@@ -1,5 +1,7 @@
 # Deli DL-286D CUPS Driver
 
+![Deli DL-286D](printer.jpg)
+
 [中文说明 / Chinese README](README.zh.md)
 
 ## Overview

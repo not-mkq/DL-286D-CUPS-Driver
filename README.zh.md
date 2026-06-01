@@ -1,5 +1,7 @@
 # 得力 DL-286D CUPS 驱动
 
+![得力 DL-286D](printer.jpg)
+
 [English README](README.md)
 
 ## 概述
